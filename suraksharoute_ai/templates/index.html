@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SurakshaRoute AI/ML Demo</title>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-icon">SR</div>
+        <div>
+          <h2>SurakshaRoute</h2>
+          <p>AI/ML Demo</p>
+        </div>
+      </div>
+
+      <nav class="side-nav">
+        <a href="#overview" class="active">Overview</a>
+        <a href="#risk-card">Risk Scoring</a>
+        <a href="#premium-card">Premium</a>
+        <a href="#fraud-card">Fraud Detection</a>
+        <a href="#trigger-card">Trigger Engine</a>
+        <a href="#payout-card">Payout</a>
+      </nav>
+
+      <div class="side-box">
+        <h4>Demo Persona</h4>
+        <p>Food Delivery Worker</p>
+        <span class="pill">Weekly Income Protection</span>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <section class="hero" id="overview">
+        <div class="hero-left">
+          <div class="hero-badge">Guidewire DEVTrails 2026</div>
+          <h1>SurakshaRoute AI/ML Control Center</h1>
+          <p>
+            AI-powered parametric insurance demo for food delivery workers.
+            Test risk, premium, fraud, trigger, and payout logic in one place.
+          </p>
+
+          <div class="hero-actions">
+            <button class="primary-btn" onclick="runQuickDemo()">Run Quick Demo</button>
+            <a class="secondary-btn" href="/docs" target="_blank">Open API Docs</a>
+          </div>
+        </div>
+
+        <div class="hero-right">
+          <div class="hero-stat">
+            <span class="stat-label">Coverage Model</span>
+            <span class="stat-value">Weekly</span>
+          </div>
+          <div class="hero-stat">
+            <span class="stat-label">Persona</span>
+            <span class="stat-value">Food Riders</span>
+          </div>
+          <div class="hero-stat">
+            <span class="stat-label">Claim Style</span>
+            <span class="stat-value">Parametric</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="summary-grid">
+        <div class="summary-card blue">
+          <h3>Risk Result</h3>
+          <p id="summaryRisk">Not calculated</p>
+        </div>
+        <div class="summary-card green">
+          <h3>Weekly Premium</h3>
+          <p id="summaryPremium">Not calculated</p>
+        </div>
+        <div class="summary-card orange">
+          <h3>Fraud Action</h3>
+          <p id="summaryFraud">Not checked</p>
+        </div>
+        <div class="summary-card purple">
+          <h3>Payout</h3>
+          <p id="summaryPayout">Not estimated</p>
+        </div>
+      </section>
+
+      <section class="dashboard-grid">
+        <!-- Risk -->
+        <div class="panel" id="risk-card">
+          <div class="panel-header">
+            <div>
+              <h2>1. Risk Scoring Engine</h2>
+              <p>Evaluate worker-zone disruption exposure</p>
+            </div>
+            <span class="tag blue-tag">AI Risk</span>
+          </div>
+
+          <div class="input-grid">
+            <input id="risk_city" placeholder="City" value="Bhubaneswar" />
+            <input id="risk_zone" placeholder="Zone" value="Patia" />
+            <input id="rainfall_risk" type="number" placeholder="Rainfall Risk" value="80" />
+            <input id="flood_risk" type="number" placeholder="Flood Risk" value="65" />
+            <input id="aqi_risk" type="number" placeholder="AQI Risk" value="55" />
+            <input id="heatwave_risk" type="number" placeholder="Heatwave Risk" value="40" />
+            <input id="road_closure_risk" type="number" placeholder="Road Closure Risk" value="50" />
+            <input id="outage_risk" type="number" placeholder="Outage Risk" value="30" />
+            <input id="shift_exposure_risk" type="number" placeholder="Shift Exposure Risk" value="70" />
+            <input id="income_dependency_risk" type="number" placeholder="Income Dependency Risk" value="85" />
+          </div>
+
+          <div class="panel-actions">
+            <button class="primary-btn small" onclick="runRiskScore()">Run Risk Score</button>
+          </div>
+
+          <div class="result-box">
+            <div class="result-head">Risk Result</div>
+            <div id="risk_output" class="beautiful-result">
+                <div class="placeholder-text">Run the module to view output</div>
+          </div>
+        </div>
+
+        <!-- Premium -->
+        <div class="panel" id="premium-card">
+          <div class="panel-header">
+            <div>
+              <h2>2. Dynamic Weekly Premium</h2>
+              <p>Calculate plan-based weekly premium</p>
+            </div>
+            <span class="tag green-tag">Pricing</span>
+          </div>
+
+          <div class="input-grid three">
+            <input id="premium_risk_score" type="number" placeholder="Risk Score" value="64" />
+            <input id="avg_weekly_income" type="number" placeholder="Avg Weekly Income" value="4500" />
+            <select id="plan_type">
+              <option>Basic</option>
+              <option selected>Smart</option>
+              <option>Plus</option>
+            </select>
+          </div>
+
+          <div class="panel-actions">
+            <button class="primary-btn small" onclick="runPremium()">Calculate Premium</button>
+          </div>
+
+          <div class="result-box">
+            <div class="result-head">Premium Result</div>
+            <div id="premium_output" class="beautiful-result">
+                <div class="placeholder-text">Run the module to view output</div>
+          </div>
+        </div>
+
+        <!-- Fraud -->
+        <div class="panel" id="fraud-card">
+          <div class="panel-header">
+            <div>
+              <h2>3. Fraud Detection Engine</h2>
+              <p>Check spoofing and suspicious claim patterns</p>
+            </div>
+            <span class="tag red-tag">Anti-Fraud</span>
+          </div>
+
+          <div class="checkbox-grid">
+            <label class="check-card"><input id="duplicate_claim" type="checkbox" /> Duplicate Claim</label>
+            <label class="check-card"><input id="zone_mismatch" type="checkbox" checked /> Zone Mismatch</label>
+            <label class="check-card"><input id="outside_working_hours" type="checkbox" /> Outside Working Hours</label>
+            <label class="check-card"><input id="unrealistic_income" type="checkbox" /> Unrealistic Income</label>
+            <label class="check-card"><input id="gps_spoof_suspected" type="checkbox" checked /> GPS Spoof Suspected</label>
+            <input id="suspicious_claim_frequency" type="number" placeholder="Suspicious Claim Frequency" value="2" />
+          </div>
+
+          <div class="panel-actions">
+            <button class="primary-btn small" onclick="runFraud()">Check Fraud</button>
+          </div>
+
+          <div class="result-box">
+            <div class="result-head">Fraud Result</div>
+            <div id="fraud_output" class="beautiful-result">
+                <div class="placeholder-text">Run the module to view output</div>
+          </div>
+        </div>
+
+        <!-- Trigger -->
+        <div class="panel" id="trigger-card">
+          <div class="panel-header">
+            <div>
+              <h2>4. Trigger Monitoring Engine</h2>
+              <p>Verify disruption event and claim eligibility</p>
+            </div>
+            <span class="tag orange-tag">Trigger Logic</span>
+          </div>
+
+          <div class="input-grid">
+            <select id="event_type">
+              <option selected>rain</option>
+              <option>aqi</option>
+              <option>road_closure</option>
+              <option>flood</option>
+              <option>outage</option>
+            </select>
+            <input id="event_zone" placeholder="Event Zone" value="Patia" />
+            <input id="event_severity" type="number" placeholder="Event Severity" value="75" />
+            <input id="worker_zone" placeholder="Worker Zone" value="Patia" />
+            <select id="policy_active">
+              <option value="true" selected>true</option>
+              <option value="false">false</option>
+            </select>
+            <input id="covered_triggers" placeholder="Covered Triggers" value="rain,aqi,road_closure" />
+            <input id="shift_start_hour" type="number" placeholder="Shift Start" value="10" />
+            <input id="shift_end_hour" type="number" placeholder="Shift End" value="22" />
+            <input id="event_hour" type="number" placeholder="Event Hour" value="18" />
+          </div>
+
+          <div class="panel-actions">
+            <button class="primary-btn small" onclick="runTrigger()">Check Trigger</button>
+          </div>
+
+          <div class="result-box">
+            <div class="result-head">Trigger Result</div>
+            <div id="trigger_output" class="beautiful-result">
+                <div class="placeholder-text">Run the module to view output</div>
+          </div>
+        </div>
+
+        <!-- Payout -->
+        <div class="panel" id="payout-card">
+          <div class="panel-header">
+            <div>
+              <h2>5. Payout Estimation Engine</h2>
+              <p>Estimate lost-income compensation</p>
+            </div>
+            <span class="tag purple-tag">Payout</span>
+          </div>
+
+          <div class="input-grid">
+            <input id="payout_avg_weekly_income" type="number" placeholder="Avg Weekly Income" value="4200" />
+            <input id="weekly_hours" type="number" placeholder="Weekly Hours" value="42" />
+            <input id="disrupted_hours" type="number" placeholder="Disrupted Hours" value="5" />
+            <input id="coverage_percentage" type="number" step="0.1" placeholder="Coverage %" value="0.8" />
+            <input id="max_payout_cap" type="number" placeholder="Max Payout Cap" value="1200" />
+          </div>
+
+          <div class="panel-actions">
+            <button class="primary-btn small" onclick="runPayout()">Estimate Payout</button>
+          </div>
+
+          <div class="result-box">
+            <div class="result-head">Payout Result</div>
+            <div id="payout_output" class="beautiful-result">
+                <div class="placeholder-text">Run the module to view output</div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="/static/script.js"></script>
+</body>
+</html>
